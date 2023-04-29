@@ -1,5 +1,6 @@
 import express from "express";
 import rutasLaboratorio from "./routes/laboratorios";
+import rutasUsuarios from "./routes/usuarios";
 import connection from "./db/config";
 import {json, urlencoded} from "body-parser";
 
@@ -9,6 +10,7 @@ app.use(json());
 app.use(urlencoded({extended:true}));
 
 app.use("/laboratorios",rutasLaboratorio);
+app.use("/usuarios",rutasUsuarios);
 /**
  * C Create
  * R Read

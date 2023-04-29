@@ -1,4 +1,5 @@
-import { Table, Model, Column, DataType } from "sequelize-typescript";
+import { Table, Model, Column, DataType, BelongsTo } from "sequelize-typescript";
+import { Usuario } from "./usuario";
 
 @Table({
     timestamps: false,
@@ -25,4 +26,7 @@ export class Laboratorio extends Model{
         allowNull:false
     })
     usuario_codigo!:string
+
+    @BelongsTo(()=>Usuario,'usuario_codigo')
+    jefe!:Usuario
 }

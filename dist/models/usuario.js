@@ -6,42 +6,44 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Laboratorio = void 0;
+exports.Usuario = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
-const usuario_1 = require("./usuario");
-let Laboratorio = class Laboratorio extends sequelize_typescript_1.Model {
+const laboratorio_1 = require("./laboratorio");
+let Usuario = class Usuario extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING,
-        allowNull: true
+        allowNull: false,
+        primaryKey: true,
     })
-], Laboratorio.prototype, "nombre", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-        allowNull: true
-    })
-], Laboratorio.prototype, "edificio", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER,
-        allowNull: true
-    })
-], Laboratorio.prototype, "capacidad", void 0);
+], Usuario.prototype, "codigo", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING,
         allowNull: false
     })
-], Laboratorio.prototype, "usuario_codigo", void 0);
+], Usuario.prototype, "email", void 0);
 __decorate([
-    (0, sequelize_typescript_1.BelongsTo)(() => usuario_1.Usuario, 'usuario_codigo')
-], Laboratorio.prototype, "jefe", void 0);
-Laboratorio = __decorate([
-    (0, sequelize_typescript_1.Table)({
-        timestamps: false,
-        tableName: "laboratorio"
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING,
+        allowNull: false
     })
-], Laboratorio);
-exports.Laboratorio = Laboratorio;
+], Usuario.prototype, "password", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+        allowNull: false
+    })
+], Usuario.prototype, "rol_id", void 0);
+__decorate([
+    (0, sequelize_typescript_1.HasMany)(() => laboratorio_1.Laboratorio, 'usuario_codigo')
+], Usuario.prototype, "laboratorios", void 0);
+Usuario = __decorate([
+    (0, sequelize_typescript_1.Table)({
+        timestamps: true,
+        tableName: "usuario",
+        paranoid: true
+    })
+], Usuario);
+exports.Usuario = Usuario;

@@ -9,8 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.actualizarLaboratorio = exports.getLabPorId = exports.obtenerTodosLaboratorios = exports.borrarLaboratorio = exports.crearLaboratorio = void 0;
+exports.actualizarLaboratorio = exports.getLabPorId = exports.buscarLaboratoriosPorNombre = exports.buscarLaboratoriosPorEncargado = exports.obtenerLaboratoriosPorNombre = exports.obtenerTodosLaboratorios = exports.borrarLaboratorio = exports.crearLaboratorio = void 0;
+const sequelize_1 = require("sequelize");
 const laboratorio_1 = require("../models/laboratorio");
+const usuario_1 = require("../models/usuario");
 const crearLaboratorio = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var lab = yield laboratorio_1.Laboratorio.create({
         nombre: req.body.nombre,
@@ -30,11 +32,41 @@ const borrarLaboratorio = (req, res) => __awaiter(void 0, void 0, void 0, functi
 });
 exports.borrarLaboratorio = borrarLaboratorio;
 const obtenerTodosLaboratorios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const todosLosLabs = yield laboratorio_1.Laboratorio.findAll();
+    const todosLosLabs = yield laboratorio_1.Laboratorio.findAll({
+        include: usuario_1.Usuario
+    });
     return res.status(200)
         .json({ message: "Laboratorios obtenidos ok!", data: todosLosLabs });
 });
 exports.obtenerTodosLaboratorios = obtenerTodosLaboratorios;
+const obtenerLaboratoriosPorNombre = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const laboratorios = yield laboratorio_1.Laboratorio.findAll({
+        attributes: ["id", ["nombre", "nombre_laboratorio"]]
+    });
+    return res.status(200).json({ message: "Laboratorios obtenidos", data: laboratorios });
+});
+exports.obtenerLaboratoriosPorNombre = obtenerLaboratoriosPorNombre;
+const buscarLaboratoriosPorEncargado = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const laboratorios = yield laboratorio_1.Laboratorio.findAll({
+        where: {
+            usuario_codigo: req.params.usuario_codigo,
+        }
+    });
+    return res.status(200).json({ message: "Laboratorios encontrados: " + laboratorios.length, data: laboratorios });
+});
+exports.buscarLaboratoriosPorEncargado = buscarLaboratoriosPorEncargado;
+const buscarLaboratoriosPorNombre = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const laboratorios = yield laboratorio_1.Laboratorio.findAll({
+        attributes: ["id", ["nombre", "nombre_laboratorio"]],
+        where: {
+            nombre: {
+                [sequelize_1.Op.like]: "%" + req.params.nombre + "%"
+            }
+        }
+    });
+    return res.status(200).json({ message: "Laboratorios encontrados: " + laboratorios.length, data: laboratorios });
+});
+exports.buscarLaboratoriosPorNombre = buscarLaboratoriosPorNombre;
 const getLabPorId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const laboratorio = yield laboratorio_1.Laboratorio.findByPk(id);

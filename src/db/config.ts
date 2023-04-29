@@ -1,5 +1,6 @@
 import {Sequelize} from "sequelize-typescript";
 import { Laboratorio } from "../models/laboratorio";
+import { Usuario } from "../models/usuario";
 
 const connection = new Sequelize({
     dialect: "mysql",
@@ -7,8 +8,9 @@ const connection = new Sequelize({
     username: "root",
     password: "hola123",
     database: "reservas",
-    logging: false,
-    models:[Laboratorio],
+    logging: true,
+    models:[Usuario,Laboratorio],
+
 });
 
 export default connection;
