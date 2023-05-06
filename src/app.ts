@@ -3,6 +3,7 @@ import rutasLaboratorio from "./routes/laboratorios";
 import rutasUsuarios from "./routes/usuarios";
 import connection from "./db/config";
 import {json, urlencoded} from "body-parser";
+//importo la ruta que cree para login y la llamo rutaLogin
 import rutaLogin from './routes/auth'
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(urlencoded({extended:true}));
 
 app.use("/laboratorios",rutasLaboratorio);
 app.use("/usuarios",rutasUsuarios);
+//le indico a mi app que cree un nuevo endpoint que será /login y funcionará con las rutas definidas en rutaLogin
 app.use("/login",rutaLogin);
 /**
  * C Create

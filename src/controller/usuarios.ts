@@ -8,7 +8,7 @@ export const crearUsuario:RequestHandler =async (req,res) => {
     var usuario = await Usuario.create({
         codigo:req.body.codigo,
         email:req.body.email,
-        password: await bcrypt.hash(req.body.password,10),
+        password: await bcrypt.hash(req.body.password,10),//cuando creamos el usuario, hasheamos el password con bcrypt
         rol_id: req.body.rol_id
     });
 
