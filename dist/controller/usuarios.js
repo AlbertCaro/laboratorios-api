@@ -8,12 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.restaurarUsuario = exports.eliminarUsuario = exports.obtenerInfoCompleta = exports.actualizarUsuario = exports.listarUsuarios = exports.crearUsuario = void 0;
 const usuario_1 = require("../models/usuario");
 const laboratorio_1 = require("../models/laboratorio");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var usuario = yield usuario_1.Usuario.create(Object.assign({}, req.body));
+    var usuario = yield usuario_1.Usuario.create({
+        codigo: req.body.codigo,
+        email: req.body.email,
+        password: yield bcrypt_1.default.hash(req.body.password, 10),
+        rol_id: req.body.rol_id
+    });
     return res.status(200).json({ message: "Usuario creado", data: usuario });
 });
 exports.crearUsuario = crearUsuario;

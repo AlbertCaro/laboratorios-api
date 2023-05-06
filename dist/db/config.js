@@ -7,9 +7,10 @@ const connection = new sequelize_typescript_1.Sequelize({
     dialect: "mysql",
     host: "localhost",
     username: "root",
-    password: "hola123",
+    password: "",
     database: "reservas",
     logging: true,
+    port: 3306,
     models: [usuario_1.Usuario, laboratorio_1.Laboratorio],
 });
 exports.default = connection;

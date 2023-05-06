@@ -1,10 +1,16 @@
 import { RequestHandler } from "express";
 import { Usuario } from "../models/usuario";
 import { Laboratorio } from "../models/laboratorio";
+import bcrypt from 'bcrypt';
 
 
 export const crearUsuario:RequestHandler =async (req,res) => {
-    var usuario = await Usuario.create({...req.body});
+    var usuario = await Usuario.create({
+        codigo:req.body.codigo,
+        email:req.body.email,
+        password: await bcrypt.hash(req.body.password,10),
+        rol_id: req.body.rol_id
+    });
 
     return res.status(200).json({message:"Usuario creado", data:usuario});
 }

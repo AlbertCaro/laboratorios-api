@@ -3,6 +3,7 @@ import rutasLaboratorio from "./routes/laboratorios";
 import rutasUsuarios from "./routes/usuarios";
 import connection from "./db/config";
 import {json, urlencoded} from "body-parser";
+import rutaLogin from './routes/auth'
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(urlencoded({extended:true}));
 
 app.use("/laboratorios",rutasLaboratorio);
 app.use("/usuarios",rutasUsuarios);
+app.use("/login",rutaLogin);
 /**
  * C Create
  * R Read

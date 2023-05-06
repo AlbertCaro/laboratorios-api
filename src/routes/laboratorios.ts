@@ -8,11 +8,13 @@ import { crearLaboratorio,
     buscarLaboratoriosPorEncargado,
     buscarLaboratoriosPorNombre } from "../controller/laboratorios";
 
+import {autorizar} from "../middleware/verify_token"
+
 const router = Router();
 
 router.post("/",crearLaboratorio);
 router.get("/porNombre",obtenerLaboratoriosPorNombre);
-router.get("/",obtenerTodosLaboratorios);
+router.get("/",autorizar,obtenerTodosLaboratorios);
 router.get("/buscar/:usuario_codigo",buscarLaboratoriosPorEncargado);
 router.get("/buscarPorNombre/:nombre",buscarLaboratoriosPorNombre);
 router.put("/:id",actualizarLaboratorio);
