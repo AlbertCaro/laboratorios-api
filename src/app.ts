@@ -1,6 +1,12 @@
 import express from "express";
 import rutasLaboratorio from "./routes/laboratorios";
 import rutasUsuarios from "./routes/usuarios";
+import rutasCarreras from "./routes/carrera";
+import rutasEquipos from "./routes/equipos";
+import rutasPracticas from "./routes/practicas";
+import rutasMaterias from "./routes/materia";
+import rutasRol from "./routes/rol"
+import rutasGrupo from "./routes/grupos";
 import connection from "./db/config";
 import {json, urlencoded} from "body-parser";
 //importo la ruta que cree para login y la llamo rutaLogin
@@ -15,6 +21,12 @@ app.use("/laboratorios",rutasLaboratorio);
 app.use("/usuarios",rutasUsuarios);
 //le indico a mi app que cree un nuevo endpoint que será /login y funcionará con las rutas definidas en rutaLogin
 app.use("/login",rutaLogin);
+app.use("/carreras",rutasCarreras);
+app.use("/equipos",rutasEquipos);
+app.use("/practicas",rutasPracticas);
+app.use("/materias",rutasMaterias);
+app.use("/rol",rutasRol);
+app.use("/grupo",rutasGrupo);
 /**
  * C Create
  * R Read
