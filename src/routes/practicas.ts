@@ -12,7 +12,7 @@ import { crearPractica,
 /**
  * importar la función que va a proteger cada una de mis rutas con un token
  */
-import {autorizar} from "../middleware/verify_tokens"
+import {autorizar} from "../middleware/verify_token"
 
 const router = Router();
 

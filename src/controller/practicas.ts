@@ -48,7 +48,7 @@ export const buscarPracticasPorNombre:RequestHandler =async (req,res) => {
 
 export const getPracticaPorId:RequestHandler =async (req,res) => {
     const {id} = req.params;
-    const Practica: Practica | null = await Practica.findByPk(id);
+    const practica: Practica | null = await Practica.findByPk(id);
     return res.status(200)
     .json({message:"Practica encontrada!", data:Practica});
 }

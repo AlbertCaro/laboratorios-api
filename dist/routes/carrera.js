@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const carrera_1 = require("../controller/carrera");
+const router = (0, express_1.Router)();
+router.post("/", carrera_1.crearCarrera);
+router.delete("/:clave", carrera_1.borrarCarrera);
+router.get("/", carrera_1.obtenerTodasCarreras);
+router.put("/:clave", carrera_1.actualizarCarrera);
+router.get("/:clave", carrera_1.getCarPorClave);
+router.get("/porNombre", carrera_1.obtenerCarrerasPorNombre);
+exports.default = router;
