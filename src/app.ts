@@ -10,9 +10,18 @@ import rutasGrupo from "./routes/grupos";
 import connection from "./db/config";
 import {json, urlencoded} from "body-parser";
 //importo la ruta que cree para login y la llamo rutaLogin
-import rutaLogin from './routes/auth'
+import rutaLogin from './routes/auth';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
+
+app.use(cors({
+    origin: '*',
+    methods: '*',
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(json());
 app.use(urlencoded({extended:true}));
@@ -50,6 +59,6 @@ connection.sync().then(()=>{
     console.log("Error",err);
 });
 
-app.listen(3000, ()=>{
+app.listen(3001, ()=>{
     console.log("Server inciado en el puerto 3000");
 });
