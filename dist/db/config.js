@@ -5,9 +5,9 @@ const laboratorio_1 = require("../models/laboratorio");
 const usuario_1 = require("../models/usuario");
 const connection = new sequelize_typescript_1.Sequelize({
     dialect: "mysql",
-    host: "localhost",
+    host: "mariadb",
     username: "root",
-    password: "",
+    password: "password",
     database: "reservas",
     logging: true,
     port: 3306,

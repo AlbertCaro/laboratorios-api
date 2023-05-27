@@ -4,9 +4,9 @@ import { Usuario } from "../models/usuario";
 
 const connection = new Sequelize({
     dialect: "mysql",
-    host: "localhost",
+    host: "mariadb",
     username: "root",
-    password: "",
+    password: "password",
     database: "reservas",
     logging: true,
     port:3306,
